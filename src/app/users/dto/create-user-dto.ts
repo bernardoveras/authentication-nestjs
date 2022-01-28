@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, Matches } from "class-validator";
+import { MessagesHelper } from "src/app/helpers/messages.helper";
 import { RegExHelper } from "src/app/helpers/regex.helper";
 
 export class CreateUserDto {
@@ -13,7 +14,7 @@ export class CreateUserDto {
   email: string;
 
   @IsNotEmpty()
-  @Matches(RegExHelper.password)
+  @Matches(RegExHelper.password, {message: MessagesHelper.PASSWORD_INVALID})
   password: string;
 }
 
