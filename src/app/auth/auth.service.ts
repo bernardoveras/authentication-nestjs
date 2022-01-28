@@ -22,10 +22,12 @@ export class AuthService {
     let user;
 
     try {
-      user = await this.userService.findOne({ email });
+      user = await this.userService.findOne({ email }, { select: ['id', 'firstName', 'lastName', 'email', 'password'] });
     } catch (error) {
       return null;
     }
+
+    console.log(user);
 
     const isPasswordValid = compareSync(password, user.password);
     if (!isPasswordValid) return null;

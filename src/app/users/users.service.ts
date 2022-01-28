@@ -23,7 +23,7 @@ export class UsersService {
     options?: FindOneOptions<UserEntity>
   ) {
     try {
-      return await this.usersRepository.findOneOrFail(conditions, options);
+      return await this.usersRepository.findOneOrFail(conditions, options ?? {select: ['id', 'firstName', 'lastName', 'email']});
     } catch (error) {
       throw new NotFoundException(error.message);
     }
